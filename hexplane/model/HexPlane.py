@@ -162,8 +162,8 @@ class HexPlane(HexPlane_Base):
             torch.stack(
                 (
                     xyz_sampled[..., self.matMode[0]],
-                    xyz_sampled[..., self.matMode[1]],
-                    xyz_sampled[..., self.matMode[2]],
+                    xyz_sampled[..., self.matMode[0]],
+                    xyz_sampled[..., self.matMode[0]],
                 )
             )
             .detach()
@@ -172,8 +172,8 @@ class HexPlane(HexPlane_Base):
         # line_time_coord: (3, B, 1, 2) coordinates for spatial-temporal planes, where line_time_coord[:, 0, 0, :] = [[t, z], [t, y], [t, x]].
         line_time_coord = torch.stack(
             (
-                xyz_sampled[..., self.vecMode[0]],
-                xyz_sampled[..., self.vecMode[1]],
+                xyz_sampled[..., self.vecMode[2]],
+                xyz_sampled[..., self.vecMode[2]],
                 xyz_sampled[..., self.vecMode[2]],
             )
         )
