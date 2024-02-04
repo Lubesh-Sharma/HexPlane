@@ -33,6 +33,20 @@ def get_train_dataset(cfg, is_stack=False):
             eval_index=cfg.data.nv3d_ndc_eval_index,
             sphere_scale=cfg.data.nv3d_ndc_sphere_scale,
         )
+    elif cfg.data.dataset_name=="iphone":
+        train_dataset=Iphone_dataset(
+
+            cfg.data.datadir,
+            "train",
+            cfg.data.downsample,
+            False,
+            False,
+            cal_fine_bbox=cfg.data.cal_fine_bbox,
+            is_stack=is_stack,
+            time_scale=cfg.data.time_scale,
+            "1.5",
+            N_random_pose=cfg.data.N_random_pose,   
+        )
     else:
         raise NotImplementedError("No such dataset")
     return train_dataset
@@ -68,6 +82,20 @@ def get_test_dataset(cfg, is_stack=True):
             eval_step=cfg.data.nv3d_ndc_eval_step,
             eval_index=cfg.data.nv3d_ndc_eval_index,
             sphere_scale=cfg.data.nv3d_ndc_sphere_scale,
+        )
+    elif cfg.data.dataset_name=="iphone":
+        test_dataset=Iphone_dataset(
+
+          cfg.data.datadir,
+          "train",
+          cfg.data.downsample,
+          False,
+          False,
+          cal_fine_bbox=cfg.data.cal_fine_bbox,
+          is_stack=is_stack,
+          time_scale=cfg.data.time_scale,
+          "1.5",
+          N_random_pose=cfg.data.N_random_pose,   
         )
     else:
         raise NotImplementedError("No such dataset")
