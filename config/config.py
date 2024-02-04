@@ -14,7 +14,7 @@ class System_Config:
 
 @dataclass
 class Model_Config:
-    model_name: str = "HexPlane_Slim"  # choose from "HexPlane", "HexPlane_Slim"
+    model_name: str = "HexPlane"  # choose from "HexPlane", "HexPlane_Slim"
     N_voxel_init: int = 64 * 64 * 64  # initial voxel number
     N_voxel_final: int = 200 * 200 * 200  # final voxel number
     step_ratio: float = 0.5
@@ -92,7 +92,7 @@ class Model_Config:
 @dataclass
 class Data_Config:
     datadir: str = "./data"
-    dataset_name: str = "dnerf"  # choose from "dnerf", "neural3D_NDC"
+    dataset_name: str = "iphone"  # choose from "dnerf", "neural3D_NDC"
     downsample: float = 1.0
     cal_fine_bbox: bool = False
     N_vis: int = -1
