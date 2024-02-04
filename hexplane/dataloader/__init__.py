@@ -87,7 +87,7 @@ def get_test_dataset(cfg, is_stack=True):
         test_dataset=Iphone_dataset(
 
           cfg.data.datadir,
-          "train",
+          "test",
           cfg.data.downsample,
           False,
           False,
