@@ -36,16 +36,16 @@ def get_train_dataset(cfg, is_stack=False):
     elif cfg.data.dataset_name=="iphone":
         train_dataset=Iphone_dataset(
 
-            cfg.data.datadir,
-            "train",
-            cfg.data.downsample,
-            False,
-            False,
-            cal_fine_bbox=cfg.data.cal_fine_bbox,
-            is_stack=is_stack,
-            time_scale=cfg.data.time_scale,
-            "1.5",
-            N_random_pose=cfg.data.N_random_pose,   
+          datadir = cfg.data.datadir,
+          split = "train",
+          ratio = cfg.data.downsample,
+          use_bg_points=False,
+          cal_fine_box=False,
+          cal_fine_bbox=cfg.data.cal_fine_bbox,
+          is_stack=is_stack,
+          time_scale=cfg.data.time_scale,
+          bbox = 1.5,
+          N_random_pose=cfg.data.N_random_pose,   
         )
     else:
         raise NotImplementedError("No such dataset")
@@ -86,15 +86,15 @@ def get_test_dataset(cfg, is_stack=True):
     elif cfg.data.dataset_name=="iphone":
         test_dataset=Iphone_dataset(
 
-          cfg.data.datadir,
-          "test",
-          cfg.data.downsample,
-          False,
-          False,
+          datadir = cfg.data.datadir,
+          split = "test",
+          ratio = cfg.data.downsample,
+          use_bg_points=False,
+          cal_fine_box=False,
           cal_fine_bbox=cfg.data.cal_fine_bbox,
           is_stack=is_stack,
           time_scale=cfg.data.time_scale,
-          "1.5",
+          bbox = 1.5,
           N_random_pose=cfg.data.N_random_pose,   
         )
     else:
