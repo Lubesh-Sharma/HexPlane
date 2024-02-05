@@ -33,19 +33,17 @@ def get_train_dataset(cfg, is_stack=False):
             eval_index=cfg.data.nv3d_ndc_eval_index,
             sphere_scale=cfg.data.nv3d_ndc_sphere_scale,
         )
-    elif cfg.data.dataset_name=="iphone":
-        train_dataset=Iphone_dataset(
-
-          cfg.data.datadir,
-          "train",
-          cfg.data.downsample,
-          False,
-          False,
-          cal_fine_bbox=cfg.data.cal_fine_bbox,
-          is_stack=is_stack,
-          time_scale=cfg.data.time_scale,
-          "1.5",
-          N_random_pose=cfg.data.N_random_pose,   
+    elif cfg.data.dataset_name=="photo":
+        train_dataset=PhotoTourismDataset(
+            cfg.data.datadir,
+            split = "train",
+            batch_size = cfg.data.batch_size
+            contraction=cfg.data.contraction,
+            ndc=cfg.data.ndc,
+            scene_bbox=cfg.data.scene_bbox,
+            global_translation=cfg.data.global_translation,
+            global_scale=cfg.data.global_scale,
+            downsample=cfg.data.downsampl,
         )
     else:
         raise NotImplementedError("No such dataset")
@@ -84,18 +82,17 @@ def get_test_dataset(cfg, is_stack=True):
             sphere_scale=cfg.data.nv3d_ndc_sphere_scale,
         )
     elif cfg.data.dataset_name=="iphone":
-        test_dataset=Iphone_dataset(
+        test_dataset=PhotoTourismDataset(
 
-          cfg.data.datadir,
-          "train",
-          cfg.data.downsample,
-          False,
-          False,
-          cal_fine_bbox=cfg.data.cal_fine_bbox,
-          is_stack=is_stack,
-          time_scale=cfg.data.time_scale,
-          "1.5",
-          N_random_pose=cfg.data.N_random_pose,
+            cfg.data.datadir,
+            split = "test",
+            batch_size = cfg.data.batch_size
+            contraction=cfg.data.contraction,
+            ndc=cfg.data.ndc,
+            scene_bbox=cfg.data.scene_bbox,
+            global_translation=cfg.data.global_translation,
+            global_scale=cfg.data.global_scale,
+            downsample=cfg.data.downsampl,
          
             
 
