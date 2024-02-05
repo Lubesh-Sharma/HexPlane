@@ -1,6 +1,6 @@
 from .dnerf_dataset import DNerfDataset
 from .neural_3D_dataset_NDC import Neural3D_NDC_Dataset
-
+from .phototourism_dataset.py import PhotoTourismDataset
 
 def get_train_dataset(cfg, is_stack=False):
     if cfg.data.dataset_name == "dnerf":
