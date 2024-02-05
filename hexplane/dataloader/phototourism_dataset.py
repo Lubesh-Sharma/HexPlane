@@ -76,11 +76,11 @@ class PhotoTourismDataset(BaseDataset):
                     for i in range(len(intrinsics))
                 ])
                 images = torch.cat([img.view(-1, 3) for img in pt_data["images"]], 0)
-                rays_o = torch.cat([ro.view(-1, 3) for ro in pt_data["rays_o"]], 0)
+                rays_o = torch.cat([ro.view(-1, 3) for ro in pt_data["rays"]], 0)
                 rays_d = torch.cat([rd.view(-1, 3) for rd in pt_data["rays_d"]], 0)
             elif split == 'test':
                 images = pt_data["images"]
-                rays_o = pt_data["rays_o"]
+                rays_o = pt_data["rays"]
                 rays_d = pt_data["rays_d"]
                 near_fars = pt_data["bounds"]
                 camera_ids = pt_data["camera_ids"]
@@ -138,8 +138,8 @@ class PhotoTourismDataset(BaseDataset):
 
     def __getitem__(self, index):
         out, index = super().__getitem__(index, return_idxs=True)
-        out["bg_color"] = torch.ones((1, 3), dtype=torch.float32)
-        out["timestamps"] = self.camera_ids[index]
+        out["rgbs"] = torch.ones((1, 3), dtype=torch.float32)
+        out["time"] = self.camera_ids[index]
         out["near_fars"] = self.near_fars[index]
         if self.imgs is not None:
             out["imgs"] = out["imgs"] / 255.0  # this converts to f32
@@ -150,14 +150,23 @@ class PhotoTourismDataset(BaseDataset):
             mid = img_w // 2
             if self.imgs is not None:
                 out["imgs_left"] = out["imgs"][:, :mid, :].reshape(-1, 3)
-                out["rays_o_left"] = out["rays_o"].view(img_h, img_w, 3)[:, :mid, :].reshape(-1, 3)
+                out["rays_o_left"] = out["rays"].view(img_h, img_w, 3)[:, :mid, :].reshape(-1, 3)
                 out["rays_d_left"] = out["rays_d"].view(img_h, img_w, 3)[:, :mid, :].reshape(-1, 3)
                 out["imgs"] = out["imgs"].view(-1, 3)
-            out["rays_o"] = out["rays_o"].reshape(-1, 3)
+            out["rays"] = out["rays"].reshape(-1, 3)
             out["rays_d"] = out["rays_d"].reshape(-1, 3)
-            out["timestamps"] = out["timestamps"].expand(out["rays_o"].shape[0], 1)
-            out["near_fars"] = out["near_fars"].expand(out["rays_o"].shape[0], 2)
-        return out
+            out["time"] = out["time"].expand(out["rays"].shape[0], 1)
+            out["near_fars"] = out["near_fars"].expand(out["rays"].shape[0], 2)
+            new_out = {}
+
+            new_out["rays"] = out["rays_o"]
+
+    # Assuming "bg_color" is a key in the original out dictionary
+            new_out["rgbs"] = out["bg_color"]
+
+    # Assuming "time" represents timestamps
+            new_out["time"] = out["time"]
+        return new_out
 
     @staticmethod
     def get_num_train_images(datadir) -> int:
