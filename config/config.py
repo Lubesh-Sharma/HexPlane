@@ -118,6 +118,15 @@ class Data_Config:
     stage_3_alpha: float = 0.1
 
     datasampler_type: str = "rays"  # choose from "rays", "images", "hierach"
+    #photo
+    split: str,
+    batch_size: Optional[int] = None,
+    contraction: bool = False,
+    ndc: bool = False,
+    scene_bbox: Optional[List] = None,
+    global_translation: List[float] = None,
+    global_scale: List[float] = None,
+ 
 
 
 @dataclass
