@@ -14,7 +14,7 @@ from hexplane.render.render import evaluation, evaluation_path
 from hexplane.render.trainer import Trainer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-torch.set_default_dtype(torch.float32)
+torch.set_default_dtype(torch.float16)
 
 
 def render_test(cfg):
