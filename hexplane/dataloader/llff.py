@@ -6,6 +6,7 @@ import os
 from PIL import Image
 from torchvision import transforms as T
 
+from .ray_utils import *
 from .ray_util import *
 
 
