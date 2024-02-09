@@ -14,7 +14,7 @@ def OctreeRender_trilinear_fast(
     rays,
     time,
     model,
-    chunk=4096,
+    chunk=2048,
     N_samples=-1,
     ndc_ray=False,
     white_bg=True,
