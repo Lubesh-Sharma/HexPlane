@@ -145,7 +145,7 @@ class Optim_Config:
     lr_decay_step: int = -1
     lr_upsample_reset: bool = True
 
-    batch_size: int = 4096
+    batch_size: int = 2048
     n_iters: int = 25000
 
 
