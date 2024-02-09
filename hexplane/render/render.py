@@ -179,7 +179,7 @@ def evaluation(
             l_v = np.mean(np.asarray(l_vgg))
             with open(f"{savePath}/{prefix}mean.txt", "w") as f:
                 f.write(
-                    f"PSNR: {psnr}, SSIM: {ssim}, MS-SSIM: {msssim}, LPIPS_a: {l_a}, LPIPS_v: {l_v}\n"
+                    #f"PSNR: {psnr}, SSIM: {ssim}, MS-SSIM: {msssim}, LPIPS_a: {l_a}, LPIPS_v: {l_v}\n"
                 )
                 print(
                     f"PSNR: {psnr}, SSIM: {ssim}, MS-SSIM: {msssim}, LPIPS_a: {l_a}, LPIPS_v: {l_v}\n"
