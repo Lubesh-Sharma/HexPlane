@@ -237,7 +237,7 @@ class LLFFDataset(Dataset):
     def __getitem__(self, idx):
         if self.split == "train":  # use data in the buffers
             time=self.all_rays
-            time[:]=1
+            time = torch.ones((4096, 1))
             sample = {
                 "rays": self.all_rays[idx],
                 "rgbs": self.all_rgbs[idx],
